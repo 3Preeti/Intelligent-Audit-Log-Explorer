@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log Detail Viewer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <img src="../images/logo.png" alt="Logo" class="logo">
+        <h1>Log Detail Viewer</h1>
+      </div>
+      <button class="back-btn" onclick="window.history.back()" title="Go back">← Back</button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="content">
+      <!-- Log Entry Display -->
+      <section class="log-section">
+        <h2>Log Entry</h2>
+        <div class="log-display" id="logDisplay">
+          <div class="log-content" id="logContent">
+            [Log content will be displayed here]
+          </div>
+        </div>
+      </section>
+
+      <!-- Log Parameters Table -->
+      <section class="log-section">
+        <h2>Log Parameters</h2>
+        <table class="params-table">
+          <thead>
+            <tr>
+              <th>Level</th>
+              <th>Time Stamp</th>
+              <th>PID</th>
+              <th>Thread Name</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+          <tbody id="paramsBody">
+            <!-- Parameters will be populated here -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Tags and Attributes -->
+      <section class="log-section">
+        <h2>Tags & Attributes</h2>
+        <div class="tags-container" id="tagsContainer">
+          <!-- Tags will be displayed here -->
+        </div>
+      </section>
+
+      <!-- Similar Logs -->
+      <section class="log-section">
+        <h2>Similar Logs</h2>
+        <div class="similar-logs" id="similarLogs">
+          <!-- Similar logs will be displayed here -->
+        </div>
+      </section>
+
+      <!-- AI Explanation -->
+      <section class="log-section">
+        <h2>AI Explanation</h2>
+        <div class="ai-explanation" id="aiExplanation">
+          <p class="loading">Loading AI analysis...</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Action Buttons -->
+    <footer class="footer">
+      <button class="btn btn-secondary" id="downloadBtn">
+        <span>⬇</span> Download
+      </button>
+      <button class="btn btn-secondary" id="reportBtn">
+        <span>📋</span> Add to Report
+      </button>
+      <button class="btn btn-primary" id="bookmarkBtn">
+        <span>⭐</span> Bookmark
+      </button>
+      <button class="btn btn-secondary" id="copyBtn">
+        <span>📋</span> Copy
+      </button>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+  </div>
+
+  <script src="script.js"></script>

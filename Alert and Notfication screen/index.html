@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Alerts & Notifications</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="logo">Alert and Notifications</div>
+  <div class="top-bar-right">
+    <button class="back-btn" onclick="window.history.back()" title="Go back">← Back</button>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- LEFT: create / edit alert -->
+  <section class="panel">
+    <div class="panel-header">
+      <h2>Create alert</h2>
+      <span class="panel-caption">Define thresholds and notification channels.</span>
+    </div>
+
+    <form id="alertForm" class="form">
+      <div class="form-group">
+        <label for="alertName">Alert name</label>
+        <input id="alertName" type="text" placeholder="e.g. High error rate" required />
+      </div>
+
+      <div class="form-group">
+        <label for="severitySelect">Severity</label>
+        <select id="severitySelect">
+          <option value="info">Info</option>
+          <option value="warning">Warning</option>
+          <option value="critical">Critical</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="ruleTypeSelect">Condition type</label>
+        <select id="ruleTypeSelect">
+          <option value="tooManyErrors">Too many errors in X minutes</option>
+          <option value="specificError">Specific error appears</option>
+          <option value="unauthorizedAccess">Unauthorized access patterns</option>
+        </select>
+      </div>
+
+      <!-- condition details (change depending on rule type) -->
+      <div class="condition-box">
+        <div class="form-group condition-field condition-tooManyErrors">
+          <label>Threshold</label>
+          <div class="inline-fields">
+            <input id="errorCountInput" type="number" min="1" value="50" />
+            <span>errors in</span>
+            <input id="errorWindowInput" type="number" min="1" value="5" />
+            <span>minutes</span>
+          </div>
+        </div>
+
+        <div class="form-group condition-field condition-specificError hidden">
+          <label for="errorTextInput">Error message contains</label>
+          <input id="errorTextInput" type="text" placeholder="e.g. database timeout" />
+        </div>
+
+        <div class="form-group condition-field condition-unauthorizedAccess hidden">
+          <label for="accessPatternInput">Pattern description</label>
+          <input id="accessPatternInput" type="text" placeholder="e.g. 5 failed logins from same IP" />
+        </div>
+      </div>
+
+      <!-- notification channels -->
+      <div class="form-group">
+        <label>Notification channels</label>
+        <div class="checkbox-row">
+          <label><input id="emailCheckbox" type="checkbox" checked /> Email</label>
+          <label><input id="slackCheckbox" type="checkbox" /> Slack / Webhook</label>
+          <label><input id="onscreenCheckbox" type="checkbox" /> On-screen alert</label>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn primary">Save alert</button>
+        <button type="button" class="btn secondary" id="resetFormBtn">Clear</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- RIGHT: active alerts + preview -->
+  <section class="panel">
+    <div class="panel-header">
+      <h2>Active alerts</h2>
+      <span class="panel-caption">Manage existing alert rules.</span>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Condition</th>
+            <th>Channels</th>
+            <th>Severity</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="alertsTableBody">
+          <!-- filled by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="preview-box">
+      <h3>Notification preview</h3>
+      <p id="previewText">Select “Preview” on any alert to see a sample notification message.</p>
+    </div>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

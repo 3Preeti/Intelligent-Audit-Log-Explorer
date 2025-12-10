@@ -1,0 +1,259 @@
+/* Basic page setup */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 24px;
+  font-family: Arial, sans-serif;
+  background: #f5f6fb;
+  color: #0f172a;
+}
+
+/* Main wrapper */
+.wrap {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Header */
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.top-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.top-left h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.top + * {
+  margin-top: 12px;
+}
+
+
+.top-left .sub {
+  color: #6e7380;
+  font-size: 13px;
+  margin: 4px 0 0 0;
+}
+
+.back-btn {
+  background: #f0f2f5;
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
+  color: #0f172a;
+  cursor: pointer;
+  padding: 10px 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+
+.back-btn:hover {
+  background-color: #e2e8f0;
+  border-color: #cbd5e1;
+}
+
+/* Grid layout */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 16px;
+}
+
+/* Sections (cards) */
+.card {
+  background: #ffffff;
+  border: 1px solid #e3e6ee;
+  padding: 14px 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+.card.full {
+  grid-column: 1 / -1;
+}
+
+.card h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.card-head {
+  display: flex;
+  width: auto;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.card-sub {
+  margin: 0;
+  color: #6e7380;
+  font-size: 13px;
+}
+
+/* Labels & inputs */
+label {
+  display: block;
+  font-size: 12px;
+  color: #6e7380;
+  margin-bottom: 4px;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e3e6ee;
+  border-radius: 10px;
+  background: #ffffff;
+  margin-bottom: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #0b74ff;
+  box-shadow: 0 0 0 3px rgba(11, 116, 255, 0.12);
+}
+
+/* Main buttons */
+.btn {
+  background: #0b74ff;
+  color: white;
+  border: none;
+  padding: 11px;
+  border-radius: 10px;
+  font-weight: 700;
+  width: 100%;
+  margin-top: 6px;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.btn:hover {
+  box-shadow: 0 6px 16px rgba(11, 116, 255, 0.18);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn.ghost {
+  background: white;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+}
+
+/* Small button (Show API key) */
+.small-btn {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* Simple layout rows */
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.key-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+/* API key box */
+.key {
+  font-family: monospace;
+  background: #f7f9fc;
+  border: 1px solid #e2e8f0;
+  padding: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Users list */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.list-item {
+  background: #f1f4fb;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+/* Footer buttons */
+.footer {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px solid #e3e6ee;
+}
+
+.footer .btn {
+  flex: 1;
+}
+
+/* Responsive tweak */
+@media (max-width: 720px) {
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .back-btn {
+    align-self: stretch;
+    justify-content: center;
+    width: 100%;
+  }
+}

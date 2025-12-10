@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Insights</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <img src="../images/logo.png" alt="Logo" class="logo">
+        <h1>AI Insights</h1>
+      </div>
+      <button class="back-btn" onclick="window.history.back()" title="Go back">← Back</button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="content">
+      <!-- KPI Cards -->
+      <section class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Total Events (24h)</div>
+          <div class="kpi-value" id="kpiTotal">186</div>
+          <div class="kpi-meta">Peak at 13:00</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Anomalies Detected</div>
+          <div class="kpi-value" id="kpiAnomalies">3</div>
+          <div class="kpi-meta">Spike detection</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Top Issue</div>
+          <div class="kpi-value-sm" id="kpiIssue">DB Timeouts</div>
+          <div class="kpi-meta">34 occurrences</div>
+        </div>
+        <div class="kpi-card critical">
+          <div class="kpi-label">Health Status</div>
+          <div class="kpi-badge critical">High Risk</div>
+          <div class="kpi-meta">Investigate immediately</div>
+        </div>
+      </section>
+
+      <!-- Charts Section -->
+      <section class="charts-section">
+        <div class="chart-card">
+          <h3>Error Timeline (24h)</h3>
+          <canvas id="timelineChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Error Distribution</h3>
+          <canvas id="distributionChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Insights Section -->
+      <section class="insights-section">
+        <div class="insights-card">
+          <h3>Top Issues</h3>
+          <div class="issue-list">
+            <div class="issue-item">
+              <span class="issue-label">DB Timeouts</span>
+              <span class="issue-count">34</span>
+            </div>
+            <div class="issue-item">
+              <span class="issue-label">Auth Failures</span>
+              <span class="issue-count">21</span>
+            </div>
+            <div class="issue-item">
+              <span class="issue-label">Payment Gateway</span>
+              <span class="issue-count">17</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="insights-card">
+          <h3>AI Summary</h3>
+          <div class="summary-text">
+            <p><strong>Most Common Issues:</strong> DB timeouts and Auth failures, spike around 13:00.</p>
+            <p><strong>Root Causes:</strong> Database overload, connection pool exhausted, network latency.</p>
+            <p><strong>Action:</strong> Check database server load and connection settings.</p>
+          </div>
+        </div>
+
+        <div class="insights-card">
+          <h3>Suggested Queries</h3>
+          <ul class="query-list">
+            <li>Show logs where type = "DB_TIMEOUT" in last 2 hours</li>
+            <li>Compare error rate between today and yesterday</li>
+            <li>List top 10 affected users by error count</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

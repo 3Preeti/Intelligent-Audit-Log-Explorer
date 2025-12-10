@@ -1,0 +1,281 @@
+/* ===== BASIC PAGE STYLES ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+body {
+  background: #aeb6e1;
+  color: #e5e7eb;
+  min-height: 100vh;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.page {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* ===== HEADER ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  margin-bottom: 16px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #38bdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #0b1120;
+  font-size: 0.9rem;
+}
+
+.header-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.header-subtitle {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.header-right {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* ===== MAIN CARD ===== */
+.card {
+  background: #020617;
+  border-radius: 14px;
+  border: 1px solid #1f2937;
+  padding: 14px 16px;
+  font-size: 0.85rem;
+}
+
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.card-subtitle {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-bottom: 10px;
+}
+
+/* ===== DRAG & DROP BOX ===== */
+.upload-area {
+  border-radius: 10px;
+  border: 2px dashed #4b5563;
+  padding: 24px;
+  text-align: center;
+  background: #020617;
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+  margin-bottom: 8px;
+}
+
+.upload-area.dragover {
+  border-color: #38bdf8;
+  background: #020617;
+}
+
+.upload-title {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.upload-subtext {
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+.upload-button {
+  margin-top: 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: none;
+  background: #38bdf8;
+  color: #0b1120;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.upload-button:hover {
+  opacity: 0.9;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.file-info {
+  font-size: 0.78rem;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+.file-info span {
+  color: #e5e7eb;
+  font-weight: 500;
+}
+
+.formats-line {
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+.formats-line code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.75rem;
+}
+
+/* ===== RAW TEXT AREA ===== */
+.textarea-label {
+  margin-top: 12px;
+  margin-bottom: 4px;
+  font-size: 0.8rem;
+}
+
+.raw-text {
+  width: 100%;
+  min-height: 120px;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 0.8rem;
+  padding: 8px;
+  resize: vertical;
+}
+
+/* ===== PREPROCESSING OPTIONS ===== */
+.options-group {
+  margin-top: 12px;
+}
+
+.options-title {
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+}
+
+.option-item {
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.option-item input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+}
+
+.primary-button {
+  margin-top: 12px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: none;
+  background: #22c55e;
+  color: #0b1120;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary-button:hover {
+  opacity: 0.9;
+}
+
+.message {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+.message strong {
+  color: #22c55e;
+}
+
+/* ===== UPLOAD HISTORY ===== */
+.history-section-title {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.history-section-subtitle {
+  font-size: 0.78rem;
+  color: #9ca3af;
+  margin-bottom: 6px;
+}
+
+.history-list {
+  font-size: 0.8rem;
+  border-top: 1px solid #1f2937;
+  margin-top: 4px;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #1f2937;
+}
+
+.history-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.history-name {
+  font-size: 0.82rem;
+}
+
+.history-meta {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.status-badge {
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.status-success {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}

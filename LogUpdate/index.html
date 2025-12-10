@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Log Upload - Intelligent Audit Log Explorer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo-circle">IA</div>
+        <div>
+          <div class="header-title">Log Upload</div>
+          <div class="header-subtitle">Intelligent Audit Log Explorer · BVC</div>
+        </div>
+      </div>
+      <div class="header-right">
+        Screen: Log Upload · Step 1 of 3
+      </div>
+    </header>
+
+    <!-- SINGLE MAIN CARD -->
+    <section class="card">
+      <div class="card-title">Upload log files</div>
+      <div class="card-subtitle">
+        Drag & drop files, or select from your computer. You can also paste raw logs.
+      </div>
+
+      <!-- Drag & drop area -->
+      <div id="upload-area" class="upload-area">
+        <div class="upload-title">Drop files here</div>
+        <div class="upload-subtext">or click to choose files</div>
+        <button class="upload-button" type="button">Browse files</button>
+        <!-- Hidden file input -->
+        <input
+          id="file-input"
+          class="hidden-input"
+          type="file"
+          multiple
+          accept=".txt,.log,.json,.xml,.csv"
+        />
+      </div>
+
+      <div id="selected-files" class="file-info">
+        No files selected yet.
+      </div>
+
+      <div class="formats-line">
+        Supports <code>.txt</code>, <code>.log</code>, <code>.json</code>,
+        <code>.xml</code>, <code>.csv</code>
+      </div>
+
+      <!-- Raw text area -->
+      <div class="textarea-label">Or paste raw log text:</div>
+      <textarea
+        id="raw-text"
+        class="raw-text"
+        placeholder="Paste your log lines here..."
+      ></textarea>
+
+      <!-- Preprocessing options -->
+      <div class="options-group">
+        <div class="options-title">Preprocessing options:</div>
+        <label class="option-item">
+          <input id="opt-timestamps" type="checkbox" checked />
+          Normalize timestamps
+        </label>
+        <label class="option-item">
+          <input id="opt-json" type="checkbox" />
+          Format JSON logs
+        </label>
+        <label class="option-item">
+          <input id="opt-schema" type="checkbox" />
+          Detect log schema (fields like time, level, message)
+        </label>
+      </div>
+
+      <button id="upload-button" class="primary-button" type="button">
+        Process & Upload
+      </button>
+
+      <div id="message" class="message">
+        Waiting for files or raw text…
+      </div>
+
+      <!-- Upload history (now inside same card) -->
+      <div class="history-section-title">Upload history</div>
+      <div class="history-section-subtitle">
+        Recently uploaded files in this session.
+      </div>
+      <div id="history" class="history-list">
+        <!-- New items added with JavaScript -->
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

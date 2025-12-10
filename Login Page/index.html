@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intelligent Log Audit Explorer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f7f8fb;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: #ffffff;
+      border-right: 1px solid #e2e8f0;
+      padding: 20px;
+      box-shadow: 2px 0 4px rgba(0, 0, 0, 0.04);
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .sidebar-logo {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .sidebar-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .nav-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      color: #6e7380;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-item:hover {
+      background: #f7f8fb;
+      color: #0b74ff;
+    }
+
+    .nav-item.active {
+      background: #f0f8ff;
+      color: #0b74ff;
+      border-left: 3px solid #0b74ff;
+      padding-left: 11px;
+      font-weight: 600;
+    }
+
+    .nav-icon {
+      font-size: 18px;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .main-content {
+      margin-left: 260px;
+      flex: 1;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 16px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      gap: 20px;
+    }
+
+    .navbar-start {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .navbar-logo {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .navbar-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0f172a;
+      white-space: nowrap;
+    }
+
+    .navbar-divider {
+      width: 1px;
+      height: 24px;
+      background: #e2e8f0;
+    }
+
+    .navbar-page-title {
+      font-size: 16px;
+      color: #6e7380;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .navbar-end {
+      margin-left: auto;
+    }
+
+    .page-header {
+      padding: 30px 30px 0 30px;
+    }
+
+    .page-header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .page-header p {
+      font-size: 14px;
+      color: #6e7380;
+    }
+
+    .top-bar {
+      display: none;
+    }
+
+    .user-area {
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #7c12e5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 16px;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+    }
+
+    .user-area:hover .user-avatar {
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      transform: scale(1.05);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      min-width: 220px;
+      display: none;
+      z-index: 1000;
+    }
+
+    .user-area.active .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-header {
+      padding: 16px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .dropdown-user-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .dropdown-user-email {
+      font-size: 12px;
+      color: #6e7380;
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      color: #0f172a;
+      text-decoration: none;
+      transition: background 0.2s ease;
+      font-size: 14px;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .dropdown-item:last-child {
+      border-radius: 0 0 8px 8px;
+      color: #dc2626;
+    }
+
+    .dropdown-item:hover {
+      background: #f7f8fb;
+    }
+
+    .dropdown-item:last-child:hover {
+      background: #fee2e2;
+    }
+
+    .header {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 30px 30px 0 30px;
+      margin-bottom: 30px;
+      box-shadow: none;
+      display: none;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: #6e7380;
+      font-size: 16px;
+    }
+
+    .content-grid {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .module-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .module-card::after {
+      content: '→';
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      font-size: 24px;
+      color: #0b74ff;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s ease;
+    }
+
+    .module-card:hover {
+      border-color: #0b74ff;
+      box-shadow: 0 12px 24px rgba(11, 116, 255, 0.2);
+      transform: translateY(-6px);
+    }
+
+    .module-card:hover::after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .module-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .module-card:hover .module-icon {
+      transform: scale(1.1);
+    }
+
+    .module-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 6px;
+      transition: color 0.3s ease;
+    }
+
+    .module-card:hover .module-title {
+      color: #0b74ff;
+    }
+
+    .module-desc {
+      font-size: 12px;
+      color: #6e7380;
+    }
+
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 200px;
+      }
+
+      .main-content {
+        margin-left: 200px;
+      }
+
+      .navbar {
+        padding: 16px 20px;
+      }
+
+      .navbar-logo {
+        width: 32px;
+        height: 32px;
+      }
+
+      .navbar-title {
+        font-size: 16px;
+      }
+
+      .navbar-page-title {
+        font-size: 14px;
+      }
+
+      .header {
+        padding: 20px;
+      }
+
+      .header h1 {
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 15px;
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
+
+      .nav-menu {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .nav-item {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="./images/logo.png" alt="Logo" class="sidebar-logo">
+      <h1 class="sidebar-title">ILAE </h1>
+    </div>
+
+    <nav class="nav-menu">
+      <a href="Dashboard/Dashboard.html" class="nav-item">
+        <span class="nav-icon">📊</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="Log%20Viewer/index.html" class="nav-item">
+        <span class="nav-icon">📋</span>
+        <span>Log Viewer</span>
+      </a>
+      <a href="Search%20and%20Screen%20Filter/index.html" class="nav-item">
+        <span class="nav-icon">🔍</span>
+        <span>Search & Filter</span>
+      </a>
+      <a href="Log%20Detail%20Viewer/index.html" class="nav-item">
+        <span class="nav-icon">🔎</span>
+        <span>Log Details</span>
+      </a>
+      <a href="AI%20Insights/index.html" class="nav-item">
+        <span class="nav-icon">🤖</span>
+        <span>AI Insights</span>
+      </a>
+      <a href="Alert%20and%20Notfication%20screen/index.html" class="nav-item">
+        <span class="nav-icon">🔔</span>
+        <span>Alerts</span>
+      </a>
+      <a href="Project%20Settings/index.html" class="nav-item">
+        <span class="nav-icon">⚙️</span>
+        <span>Settings</span>
+      </a>
+      <a href="Login%20Page/login.html" class="nav-item">
+        <span class="nav-icon">🔐</span>
+        <span>Login</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Navbar -->
+    <nav class="navbar">
+      <div class="navbar-start">
+        <div class="navbar-title">Intelligent Log Audit Explorer</div>
+      </div>
+      <div class="navbar-end">
+        <div class="user-area" id="userArea">
+          <div class="user-avatar" id="userAvatar">A</div>
+          <div class="dropdown-menu">
+            <div class="dropdown-header">
+              <div class="dropdown-user-name" id="userName">Admin User</div>
+              <div class="dropdown-user-email" id="userEmail">admin@example.com</div>
+            </div>
+            <a href="Project%20Settings/index.html" class="dropdown-item">
+              <span>⚙️</span>
+              <span>Settings</span>
+            </a>
+            <button class="dropdown-item" id="logoutBtn">
+              <span>🚪</span>
+              <span>Logout</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1>Quick Actions</h1>
+      <p>Start exploring your logs</p>
+    </div>
+
+    <div class="content-grid">
+      <a href="Log%20Viewer/index.html" class="module-card">
+        <div class="module-icon">🚀</div>
+        <div class="module-title">View Recent Logs</div>
+        <div class="module-desc">Jump to latest log entries</div>
+      </a>
+
+      <a href="Search%20and%20Screen%20Filter/index.html" class="module-card">
+        <div class="module-icon">🔍</div>
+        <div class="module-title">Search Logs</div>
+        <div class="module-desc">Find specific log entries</div>
+      </a>
+
+      <a href="AI%20Insights/index.html" class="module-card">
+        <div class="module-icon">💡</div>
+        <div class="module-title">View AI Analysis</div>
+        <div class="module-desc">Get intelligent insights</div>
+      </a>
+
+      <a href="Alert%20and%20Notfication%20screen/index.html" class="module-card">
+        <div class="module-icon">⚡</div>
+        <div class="module-title">Create Alert</div>
+        <div class="module-desc">Set up new notifications</div>
+      </a>
+
+      <a href="Dashboard/Dashboard.html" class="module-card">
+        <div class="module-icon">📈</div>
+        <div class="module-title">View Analytics</div>
+        <div class="module-desc">Check system metrics</div>
+      </a>
+
+      <a href="Project%20Settings/index.html" class="module-card">
+        <div class="module-icon">🔧</div>
+        <div class="module-title">Configure Settings</div>
+        <div class="module-desc">Manage your workspace</div>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentPath = window.location.pathname;
+      const navItems = document.querySelectorAll('.nav-item');
+      
+      navItems.forEach(item => {
+        const href = item.getAttribute('href');
+        if (currentPath.includes(href.split('/')[0])) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // User area dropdown toggle
+    const userArea = document.getElementById('userArea');
+    userArea.addEventListener('click', (e) => {
+      e.stopPropagation();
+      userArea.classList.toggle('active');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', () => {
+      userArea.classList.remove('active');
+    });
+
+    // Load user info from localStorage
+    const userEmail = localStorage.getItem('userEmail') || 'admin@example.com';
+    const userName = userEmail.split('@')[0].charAt(0).toUpperCase() + userEmail.split('@')[0].slice(1);
+    const userInitial = userName.charAt(0).toUpperCase();
+
+    document.getElementById('userEmail').textContent = userEmail;
+    document.getElementById('userName').textContent = userName;
+    document.getElementById('userAvatar').textContent = userInitial;
+
+    // Logout functionality
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('userEmail');
+      window.location.href = 'Login%20Page/login.html';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login • Intelligent System</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="header-wrapper">
+      <img src="images/logo.png" alt="App Logo" class="logo" />
+      <div class="title">Welcome Back</div>
+    </div>
+
+    <form id="loginForm">
+      <div id="errorMessage" class="error-message" style="display: none;">
+        Incorrect email or password
+      </div>
+
+      <div class="field-group">
+        <label for="email">Email</label>
+        <input class="input" type="email" id="email" placeholder="" required />
+      </div>
+
+      <div class="field-group">
+        <label for="password">Password</label>
+        <div class="password-wrapper">
+          <input class="input" type="password" id="password" placeholder="" required />
+          <button type="button" class="toggle-password" id="togglePassword">
+            <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="actions-row">
+        <label class="remember">
+          <input type="checkbox" />
+          <span>Remember me</span>
+        </label>
+        <a href="#" class="link">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn-primary">Log In</button>
+
+      <div class="divider">or</div>
+
+      <div class="social-row">
+        <button type="button" class="social-btn">Continue with Google</button>
+        <button type="button" class="social-btn">Continue with GitHub</button>
+      </div>
+    </form>
+
+    <div class="footer-text">
+      New here? <a href="#">Create an account</a>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>

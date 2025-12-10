@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Intelligent Audit Log Explorer - Simple Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" href="Dashboard.css" />
+
+  <!-- Chart.js from CDN (for line, bar, pie charts) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="page">
+    <!-- BACK BUTTON -->
+    <div class="back-button-container">
+      <button class="back-button" onclick="window.history.back()" title="Go back">
+        ← Back
+      </button>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+      <h1>Intelligent Audit Log Explorer</h1>
+      <p>BVC · Simple Dashboard Example</p>
+    </header>
+
+    <!-- KPI CARDS -->
+    <section class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-label">Logs processed · today</div>
+        <div class="kpi-value">12,458</div>
+        <div class="kpi-extra positive">+8.4% vs yesterday</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-label">Alerts detected</div>
+        <div class="kpi-value">23</div>
+        <div class="kpi-extra negative">-3.1% week-on-week</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-label">AI insights · today</div>
+        <div class="kpi-value">7</div>
+        <div class="kpi-extra positive">3 new in last hour</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-label">Active users (24h)</div>
+        <div class="kpi-value">147</div>
+        <div class="kpi-extra positive">12 new users</div>
+      </div>
+    </section>
+
+    <!-- CHARTS ROW 1: LINE + BAR -->
+    <section class="charts-row">
+      <div class="chart-card">
+        <h2>Activity over time (line chart)</h2>
+        <p class="chart-subtitle">Login & log volume during the last 7 days</p>
+        <canvas id="lineChart"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <h2>Logs by category (bar chart)</h2>
+        <p class="chart-subtitle">Different types of events</p>
+        <canvas id="barChart"></canvas>
+      </div>
+    </section>
+
+    <!-- CHARTS ROW 2: PIE + DATA GRID -->
+    <section class="charts-row">
+      <div class="chart-card">
+        <h2>Severity distribution (pie chart)</h2>
+        <p class="chart-subtitle">How many Info / Warning / Critical logs</p>
+        <canvas id="pieChart"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <h2>Recent log events (data grid)</h2>
+        <p class="chart-subtitle">Simple example of a data table</p>
+
+        <table class="data-grid">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>User</th>
+              <th>Type</th>
+              <th>Source IP</th>
+              <th>Severity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>10:41:23</td>
+              <td>student_24</td>
+              <td>Login success</td>
+              <td>192.168.1.46</td>
+              <td><span class="badge info">INFO</span></td>
+            </tr>
+            <tr>
+              <td>10:40:10</td>
+              <td>faculty_cs</td>
+              <td>Grade sheet export</td>
+              <td>192.168.1.10</td>
+              <td><span class="badge info">INFO</span></td>
+            </tr>
+            <tr>
+              <td>10:39:02</td>
+              <td>student_05</td>
+              <td>Failed login</td>
+              <td>10.0.0.12</td>
+              <td><span class="badge warning">WARNING</span></td>
+            </tr>
+            <tr>
+              <td>10:35:33</td>
+              <td>unknown</td>
+              <td>Multiple failed logins</td>
+              <td>203.0.113.8</td>
+              <td><span class="badge critical">CRITICAL</span></td>
+            </tr>
+            <tr>
+              <td>10:30:11</td>
+              <td>admin_it</td>
+              <td>Role change: student → tutor</td>
+              <td>192.168.1.3</td>
+              <td><span class="badge info">INFO</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="footer">
+     
+    </footer>
+  </div>
+
+  <!-- Our JS (after HTML, so elements exist when script runs) -->
+  <script src="Dashboard.js"></script>
+</body>
+</html>

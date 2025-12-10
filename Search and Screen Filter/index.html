@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Log Viewer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="logo">
+    <img src="../images/logo.png" alt="Logo" class="logo-icon" />
+    Search and Screen Filter
+  </div>
+  <button class="back-btn" onclick="window.history.back()" title="Go back">← Back</button>
+</header>
+
+<div class="app-container">
+  <!-- LEFT: FILTERS -->
+  <aside class="sidebar">
+    <h2>Filters</h2>
+
+    <div class="filter-group">
+      <label for="levelFilter">Log level</label>
+      <select id="levelFilter">
+        <option value="ALL">All</option>
+        <option value="ERROR">Error</option>
+        <option value="WARN">Warn</option>
+        <option value="INFO">Info</option>
+        <option value="DEBUG">Debug</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="moduleFilter">Module / Service</label>
+      <select id="moduleFilter">
+        <option value="ALL">All</option>
+        <option value="AuthService">AuthService</option>
+        <option value="PaymentService">PaymentService</option>
+        <option value="NotificationService">NotificationService</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="searchFilter">Search text</label>
+      <input id="searchFilter" type="text" placeholder="Search in message..." />
+      <small class="hint">Matches message & tags.</small>
+    </div>
+
+    <button id="resetBtn" class="reset-btn">Reset filters</button>
+  </aside>
+
+  <!-- CENTER: LOG TABLE -->
+  <main class="main-panel">
+    <div class="main-header">
+      <div>
+        <h2>Logs</h2>
+        <p className="sub-title">Click a row to see more details.</p>
+      </div>
+      <div class="results-info" id="resultsInfo">Showing 0 logs</div>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Level</th>
+            <th>Module</th>
+            <th>Message</th>
+            <th>Tags</th>
+          </tr>
+        </thead>
+        <tbody id="logsTableBody">
+          <!-- Filled by JS -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

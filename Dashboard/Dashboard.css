@@ -1,0 +1,226 @@
+/* ===== BASIC PAGE LAYOUT ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+body {
+  background: #ffffff;
+  color: #0f172a; /* dark navy text */
+  padding: 16px;
+}
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Back Button */
+.back-button-container {
+  margin-bottom: 16px;
+}
+
+.back-button {
+  padding: 8px 14px;
+  background: #f0f2f5;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  color: #0f172a;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  background: #e5e7eb;
+  border-color: #0b74ff;
+  color: #0b74ff;
+}
+
+.back-button:active {
+  transform: scale(0.98);
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: #ffffff;
+  border: 1px solid #e2e8f0; /* light gray border */
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.header h1 {
+  font-size: 1.3rem;
+  color: #0f172a;
+}
+
+.header p {
+  font-size: 0.85rem;
+  color: #475569; /* slate gray */
+}
+
+/* ===== KPI CARDS ===== */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.kpi-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.kpi-label {
+  font-size: 0.75rem;
+  color: #000000; /* black */
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+
+.kpi-value {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.kpi-extra {
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+.kpi-extra.positive {
+  color: #16a34a; /* green */
+}
+
+.kpi-extra.negative {
+  color: #dc2626; /* red */
+}
+
+/* ===== CHART CARD LAYOUT ===== */
+.charts-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1.5fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.chart-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.chart-card h2 {
+  font-size: 1rem;
+  margin-bottom: 2px;
+  color: #0f172a;
+}
+
+.chart-subtitle {
+  font-size: 0.8rem;
+  color: #042758;
+  margin-bottom: 8px;
+}
+
+/* Canvas size */
+.chart-card canvas {
+  width: 100%;
+  max-height: 260px;
+}
+
+/* ===== DATA GRID TABLE ===== */
+.data-grid {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 6px;
+  font-size: 0.8rem;
+}
+
+.data-grid th,
+.data-grid td {
+  padding: 6px;
+  text-align: left;
+}
+
+.data-grid thead {
+  background: #f1f5f9; /* light slate */
+}
+
+.data-grid th {
+  color: #475569;
+  border-bottom: 2px solid #e2e8f0;
+  font-size: 0.75rem;
+}
+
+.data-grid tbody tr:nth-child(odd) {
+  background: #ffffff;
+}
+
+.data-grid tbody tr:nth-child(even) {
+  background: #f8fafc; /* very light slate */
+}
+
+.data-grid tbody tr:hover {
+  background: #e2e8f0;
+}
+
+/* ===== BADGES (Severity) ===== */
+.badge {
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.badge.info {
+  background: #dbeafe; /* light blue */
+  color: #1e40af; /* dark blue */
+}
+
+.badge.warning {
+  background: #fef9c3; /* light yellow */
+  color: #b45309; /* amber 700 */
+}
+
+.badge.critical {
+  background: #fee2e2; /* light red */
+  color: #b91c1c; /* red 700 */
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  font-size: 0.75rem;
+  color: #64748b;
+  text-align: right;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .kpi-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 8px;
+  }
+  .kpi-row {
+    grid-template-columns: 1fr;
+  }
+}
