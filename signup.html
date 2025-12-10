@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account • Intelligent System</title>
+
+  <!-- reuse same styles as login -->
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="header-wrapper">
+      <img src="images/logo.png" alt="App Logo" class="logo" />
+      <div class="title">Create your account</div>
+    </div>
+
+    <form id="signupForm">
+      <div class="field-group">
+        <label for="name">Full name</label>
+        <input class="input" type="text" id="name" required />
+      </div>
+
+      <div class="field-group">
+        <label for="email">Email</label>
+        <input class="input" type="email" id="signupEmail" required />
+      </div>
+
+      <div class="field-group">
+        <label for="password">Password</label>
+        <input class="input" type="password" id="signupPassword" required />
+      </div>
+
+      <button type="submit" class="btn-primary">Create account</button>
+
+      <div class="footer-text">
+        Already have an account?
+        <a href="index.html">Log in</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // TEMP: fake registration – just redirect back to login
+    document.getElementById("signupForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Account created! Now log in.");
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>
